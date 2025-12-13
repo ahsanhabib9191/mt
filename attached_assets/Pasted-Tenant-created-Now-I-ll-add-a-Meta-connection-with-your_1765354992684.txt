@@ -1,0 +1,32 @@
+Tenant created. Now I'll add a Meta connection with your access token to test the APIs:
+
+
+Executed SQL query INSERT INTO meta_connections (tenant_id, ad_account_id, access_token, status, permissions, token_expires_at, created_at, updated_at) VALUES ( 1, '1274652997737150', 'EAAIst1o3BZBABQFI3P4sXoITxZCDK077P4ZC8pkXLzXBGKqUZCXeu4CNcEEKRvZCjgcPmIZCj5X2ocrXZCd8mj6vmJWrZCHTg4iKNd2UsAd9Whaqg7kXOUacCkG1yk2D7yEAPF8FQYXyMbeXWCopndE7cSGVjEPwFdbhNWmqwTD4J2xifqnwQSZCv20cibKxZA4vbIYekZCP9r1R8juZAcHUZCm3lKF3nj2FsWotnCaw7', 'ACTIVE', '["ads_management", "ads_read", "read_insights", "business_management"]', NOW() + INTERVAL '60 days', NOW(), NOW() ) RETURNING id;
+
+Decided on endpoint testing strategy
+Connection created. Now let's test both APIs:
+
+
+Executed curl -s "http://localhost:3000/api/pixels?tenantId=1&adAccountId=1274652997737150" 2>&1
+
+Executed curl -s "http://localhost:3000/api/capi/status?tenantId=1&adAccountId=1274652997737150&pixelId=123456789" 2>&1
+
+Decided on explaining ad account permissions (4 seconds)
+The APIs are connecting to Meta, but there are permission issues with the sandbox account. Here's what's happening:
+
+Issue: Sandbox Ad Account Permissions
+Your sandbox ad account (1274652997737150) needs to grant permissions to your app.
+
+Fix This:
+Go to Business Settings → Ad Accounts
+Select your sandbox account: Shothik Marketing Sandbox
+Click Add People and add yourself with Full Control
+Or click Add Partner and add your app
+Alternative: Use Your Real Ad Account
+If you have a real ad account connected to your Business Manager, you can use that instead. Let me test with your user info:
+
+
+Executed curl -s "http://localhost:3000/api/auth/meta/accounts?accessToken=EAAIst1o3BZBABQFI3P4sXoITxZCDK077P4ZC8pkXLzXBGKqUZCXeu4CNcEEKRvZCjgcPmIZCj5X2ocrXZCd8mj6vmJWrZCHTg4iKNd2UsAd9Whaqg7kXOUacCkG1yk2D7yEAPF8FQYXyMbeXWCopndE7cSGVjEPwFdbhNWmqwTD4J2xifqnwQSZCv20cibKxZA4vbIYekZCP9r1R8juZAcHUZCm3lKF3nj2FsWotnCaw7" 2>&1
+
+Selected ad account for connection
+You have 3 real ad accounts! Let me update the connection to use one of them:

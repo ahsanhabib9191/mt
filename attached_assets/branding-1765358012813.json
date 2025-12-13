@@ -1,0 +1,116 @@
+{
+  "colorScheme": "light",
+  "fonts": [
+    {
+      "family": "Helvetica",
+      "role": "body"
+    },
+    {
+      "family": "Arial",
+      "role": "body"
+    },
+    {
+      "family": "gdsherpa",
+      "role": "display"
+    }
+  ],
+  "colors": {
+    "primary": "#00112C",
+    "accent": "#D8EFEF",
+    "background": "#FFFFFF",
+    "textPrimary": "#111111",
+    "link": "#D8EFEF"
+  },
+  "typography": {
+    "fontFamilies": {
+      "primary": "Helvetica",
+      "heading": "gdsherpa"
+    },
+    "fontStacks": {
+      "heading": [
+        "gdsherpa",
+        "Helvetica",
+        "Arial",
+        "sans-serif"
+      ],
+      "body": [
+        "gdsherpa",
+        "Helvetica",
+        "Arial",
+        "sans-serif"
+      ],
+      "paragraph": [
+        "gdsherpa",
+        "Helvetica",
+        "Arial",
+        "sans-serif"
+      ]
+    },
+    "fontSizes": {
+      "h1": "16px",
+      "h2": "56px",
+      "body": "16px"
+    }
+  },
+  "spacing": {
+    "baseUnit": 4,
+    "borderRadius": "8px"
+  },
+  "components": {
+    "input": {
+      "borderColor": "#CCCCCC",
+      "borderRadius": "8px"
+    },
+    "buttonPrimary": {
+      "background": "#111111",
+      "textColor": "#FFFFFF",
+      "borderColor": "#111111",
+      "borderRadius": "6px",
+      "shadow": "none"
+    },
+    "buttonSecondary": {
+      "background": "#FFFFFF",
+      "textColor": "#111111",
+      "borderRadius": "6px",
+      "shadow": "none"
+    }
+  },
+  "images": {
+    "logo": "File saved at: attached_assets/logo.svg",
+    "favicon": "File saved at: attached_assets/favicon.png",
+    "ogImage": null
+  },
+  "__framework_hints": [],
+  "__llm_logo_reasoning": {
+    "selectedIndex": 0,
+    "reasoning": "Logo #0 matches the brand name 'js.id' and is located in the header, making it the primary brand logo. It is visible and links to the homepage, fulfilling the criteria for selection.",
+    "confidence": 0.9
+  },
+  "__llm_button_reasoning": {
+    "primary": {
+      "index": 0,
+      "text": "Next",
+      "reasoning": "Button #0 has a dark background (#111111) with white text, making it stand out as a strong call-to-action. The text 'Next' is action-oriented, indicating it is likely the primary CTA. Additionally, it uses the class 'ux-button-primary', which suggests it is intended as the main action button."
+    },
+    "secondary": {
+      "index": 1,
+      "text": "Here's how it works",
+      "reasoning": "Button #1 has a light background (#FFFFFF) with dark text (#111111), making it less prominent than Button #0. The text 'Here's how it works' is informative rather than action-oriented, indicating it serves as a secondary action. It is also from a different color group than Button #0, fulfilling the requirement for a secondary button."
+    },
+    "confidence": 0.95
+  },
+  "personality": {
+    "tone": "modern",
+    "energy": "medium",
+    "targetAudience": "developers and tech enthusiasts"
+  },
+  "designSystem": {
+    "framework": "tailwind",
+    "componentLibrary": "unknown"
+  },
+  "confidence": {
+    "buttons": 0.95,
+    "colors": 0.9,
+    "overall": 0.925
+  }
+}

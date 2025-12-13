@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>User Registration - Shothik.ai</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#13ec80",
+              "background-light": "#f6f8f7",
+              "background-dark": "#102219",
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="font-display">
+<div class="relative flex h-auto min-h-screen w-full flex-col bg-background-light dark:bg-background-dark group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<div class="px-4 md:px-10 lg:px-20 xl:px-40 flex flex-1 justify-center py-5">
+<div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+<header class="flex items-center justify-between whitespace-nowrap px-4 md:px-10 py-3">
+<div class="flex items-center gap-4 text-white">
+<div class="size-6 text-primary">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-gray-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">Shothik.ai</h2>
+</div>
+<div class="flex items-center gap-2">
+<p class="text-gray-600 dark:text-[#9db9ab] text-sm hidden sm:block">Already have an account?</p>
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-gray-200/80 dark:bg-[#283930] text-gray-800 dark:text-white text-sm font-bold leading-normal tracking-[0.015em]">
+<span class="truncate">Log In</span>
+</button>
+</div>
+</header>
+<main class="flex flex-1 flex-col items-center justify-center px-4 py-12 md:py-20">
+<div class="w-full max-w-md mx-auto space-y-8">
+<div class="flex flex-col gap-3 text-center">
+<p class="text-gray-900 dark:text-white text-3xl md:text-4xl font-black leading-tight tracking-[-0.033em]">Create Your Account</p>
+<p class="text-gray-600 dark:text-[#9db9ab] text-base font-normal leading-normal">Automate Your Meta Ads Today</p>
+</div>
+<div class="space-y-6">
+<div class="flex flex-col min-w-40 flex-1">
+<label class="text-gray-900 dark:text-white text-sm font-medium leading-normal pb-2" for="full-name">Full Name</label>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-gray-900 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-gray-300 dark:border-[#3b5447] bg-background-light dark:bg-[#1c2721] focus:border-primary/50 h-12 placeholder:text-gray-400 dark:placeholder:text-[#9db9ab] px-4 py-3 text-base font-normal leading-normal" id="full-name" placeholder="Enter your full name" value=""/>
+</div>
+<div class="flex flex-col min-w-40 flex-1">
+<label class="text-gray-900 dark:text-white text-sm font-medium leading-normal pb-2" for="work-email">Work Email</label>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-gray-900 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-gray-300 dark:border-[#3b5447] bg-background-light dark:bg-[#1c2721] focus:border-primary/50 h-12 placeholder:text-gray-400 dark:placeholder:text-[#9db9ab] px-4 py-3 text-base font-normal leading-normal" id="work-email" placeholder="name@company.com" type="email" value=""/>
+</div>
+<div class="flex flex-col min-w-40 flex-1">
+<label class="text-gray-900 dark:text-white text-sm font-medium leading-normal pb-2" for="password">Password</label>
+<div class="relative flex w-full flex-1 items-stretch">
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-gray-900 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-gray-300 dark:border-[#3b5447] bg-background-light dark:bg-[#1c2721] focus:border-primary/50 h-12 placeholder:text-gray-400 dark:placeholder:text-[#9db9ab] px-4 py-3 text-base font-normal leading-normal pr-12" id="password" placeholder="Create a strong password" type="password" value=""/>
+<button class="absolute inset-y-0 right-0 flex items-center pr-4 text-gray-400 dark:text-[#9db9ab] cursor-pointer">
+<span class="material-symbols-outlined" data-icon="visibility" data-size="24px" data-weight="regular">visibility</span>
+</button>
+</div>
+</div>
+<div class="flex flex-col min-w-40 flex-1">
+<label class="text-gray-900 dark:text-white text-sm font-medium leading-normal pb-2" for="confirm-password">Confirm Password</label>
+<div class="relative flex w-full flex-1 items-stretch">
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-gray-900 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-gray-300 dark:border-[#3b5447] bg-background-light dark:bg-[#1c2721] focus:border-primary/50 h-12 placeholder:text-gray-400 dark:placeholder:text-[#9db9ab] px-4 py-3 text-base font-normal leading-normal pr-12" id="confirm-password" placeholder="Re-enter your password" type="password" value=""/>
+<button class="absolute inset-y-0 right-0 flex items-center pr-4 text-gray-400 dark:text-[#9db9ab] cursor-pointer">
+<span class="material-symbols-outlined" data-icon="visibility_off" data-size="24px" data-weight="regular">visibility_off</span>
+</button>
+</div>
+</div>
+<button class="flex w-full min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-4 bg-primary text-[#111814] text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background-dark focus:ring-primary">
+<span class="truncate">Create Account</span>
+</button>
+<div class="text-center">
+<p class="text-xs text-gray-500 dark:text-gray-400">By signing up, you agree to our <a class="font-medium text-primary/90 hover:text-primary" href="#">Terms of Service</a>.</p>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+</div>
+</div>
+</body></html>

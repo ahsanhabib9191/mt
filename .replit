@@ -1,0 +1,70 @@
+modules = ["nodejs-20", "bash", "postgresql-16"]
+[agent]
+expertMode = true
+integrations = ["javascript_database:1.0.0", "javascript_openai_ai_integrations:1.0.0"]
+
+[nix]
+channel = "stable-25_05"
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Frontend"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Backend API"
+
+[[workflows.workflow]]
+name = "Frontend"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd client && npm run dev"
+waitForPort = 5000
+
+[workflows.workflow.metadata]
+outputType = "webview"
+
+[[workflows.workflow]]
+name = "Backend API"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npx ts-node server/index.ts"
+waitForPort = 3000
+
+[workflows.workflow.metadata]
+outputType = "console"
+
+[[ports]]
+localPort = 3000
+externalPort = 3000
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+
+[[ports]]
+localPort = 5001
+externalPort = 3001
+
+[deployment]
+deploymentTarget = "static"
+build = ["cd", "client", "&&", "npm", "run", "build"]
+publicDir = "client/dist"
+
+[userenv]
+
+[userenv.shared]
+META_REDIRECT_URI = "https://1e95b693-ed56-43c4-b915-ae28f291af9b-00-k2gcuim4jew.sisko.replit.dev/api/auth/meta/callback"
+META_API_VERSION = "v21.0"

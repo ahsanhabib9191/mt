@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Welcome to Shothik.ai</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24;
+        }
+    </style>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec80",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#102219",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1c2721",
+                        "border-light": "#e0e4e2",
+                        "border-dark": "#3b5447",
+                        "text-primary-light": "#102219",
+                        "text-primary-dark": "#ffffff",
+                        "text-secondary-light": "#5a6862",
+                        "text-secondary-dark": "#9db9ab"
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<div class="flex h-full grow flex-col">
+<div class="flex flex-1 justify-center px-4 py-5 sm:px-6 md:px-8 lg:px-10">
+<div class="flex w-full max-w-6xl flex-col">
+<!-- TopNavBar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-border-light dark:border-border-dark px-4 py-3 md:px-10">
+<div class="flex items-center gap-4 text-text-primary-light dark:text-text-primary-dark">
+<div class="size-6 text-primary">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em] text-text-primary-light dark:text-text-primary-dark">Shothik.ai</h2>
+</div>
+<div class="flex flex-1 items-center justify-end gap-8">
+<a class="hidden text-sm font-medium leading-normal text-text-primary-light dark:text-text-primary-dark sm:block" href="#">Help</a>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="User profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAOISdB8Xn38Jdx2kaLv_BiK4TPPfnjTX2ZGIG6nvTPGCOfJI0Ao53WN_6MVWVAl259itwqrlA4Jb-FCf_KqA3jI7zY6xI9UxmNbLMBSHUmtqCU15Y2crpIX57O7OEgT-0g5rGbyHPuX_mBDWT8QaaN-smUgFLySTPriSV6uL-d9OuVWFdjb8w5ojHhpbqvHO4ZYNJ3l1AxmwgMJlsHgI7yrlNtetxMlGEtgJvPo51ZvsIvEJ7ehk3CUQwNCLrsHvJUxBgvdPXJov8");'></div>
+</div>
+</header>
+<main class="flex flex-1 flex-col items-center justify-center p-4 py-12 md:p-10">
+<div class="@container w-full">
+<div class="grid grid-cols-1 gap-12 @[1024px]:grid-cols-2 @[1024px]:gap-16">
+<!-- Left Column: Hero Graphic -->
+<div class="flex items-center justify-center">
+<div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-xl" data-alt="Abstract visualization of AI data nodes and connections in blue and green hues." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA4PcaXfXPxhUE0WshRKBi5d1mpq7hXKSzVLbN9cNH8qbn7znpPKOoaF2Y9ax3z6ieBT7T-GZhmL3wC-1KLm8Pqv9u8mIr6oXN05TEdnMV_jeaDFoJ--lKiLcRPbIY-qY_KwRyM64R6osRaCfMQMIptS4B0pYxCqgQDoRJGNalcf2yul2oNaxEDCXeFYj1jx2bNZrPwaVjaDAGqBVEkhsH7ZsLJKllMW1gzrGVb4Lefqm5fJ1uV_o3iyKztwfKoI5pbZdWnrwMimNQ');"></div>
+</div>
+<!-- Right Column: Content -->
+<div class="flex flex-col justify-center gap-8">
+<!-- Hero Section -->
+<div class="flex flex-col gap-6">
+<div class="flex flex-col gap-2 text-left">
+<h1 class="text-4xl font-black leading-tight tracking-[-0.033em] text-text-primary-light dark:text-text-primary-dark sm:text-5xl">Welcome to Shothik.ai</h1>
+<h2 class="text-base font-normal leading-normal text-text-secondary-light dark:text-text-secondary-dark sm:text-lg">Automate your Meta ads with the power of AI. Simplify campaign management, optimize for performance, and unlock data-driven insights to maximize your ROI.</h2>
+</div>
+</div>
+<!-- Progress Bar -->
+<div class="flex flex-col gap-3">
+<p class="text-base font-medium leading-normal text-text-primary-light dark:text-text-primary-dark">Step 1 of 3: Connect Account</p>
+<div class="rounded-full bg-border-light dark:bg-border-dark h-2"><div class="h-2 rounded-full bg-primary" style="width: 33%;"></div></div>
+</div>
+<!-- Call to Action -->
+<button class="flex min-w-[84px] w-full max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-primary text-background-dark text-base font-bold leading-normal tracking-[0.015em]">
+<span class="truncate">Connect Facebook Account</span>
+</button>
+<!-- Meta Text / Social Proof -->
+<p class="text-sm font-normal leading-normal text-text-secondary-light dark:text-text-secondary-dark">Trusted by 1000+ businesses</p>
+</div>
+</div>
+</div>
+<!-- Feature Section -->
+<div class="flex w-full flex-col gap-10 px-0 py-16 @container md:px-4">
+<div class="flex flex-col gap-4">
+<h1 class="text-3xl font-bold leading-tight tracking-tight text-text-primary-light dark:text-text-primary-dark sm:text-4xl sm:font-black sm:tracking-[-0.033em]">Unlock Your Ad Potential</h1>
+<p class="max-w-[720px] text-base font-normal leading-normal text-text-secondary-light dark:text-text-secondary-dark">Here's how Shothik.ai transforms your advertising strategy.</p>
+</div>
+<div class="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-4 p-0">
+<div class="flex flex-1 flex-col gap-3 rounded-xl border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark p-4">
+<div class="text-primary"><span class="material-symbols-outlined text-2xl">auto_awesome</span></div>
+<div class="flex flex-col gap-1">
+<h2 class="text-base font-bold leading-tight text-text-primary-light dark:text-text-primary-dark">AI-Powered Optimization</h2>
+<p class="text-sm font-normal leading-normal text-text-secondary-light dark:text-text-secondary-dark">Let our intelligent algorithms automatically adjust your campaigns for the best possible results.</p>
+</div>
+</div>
+<div class="flex flex-1 flex-col gap-3 rounded-xl border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark p-4">
+<div class="text-primary"><span class="material-symbols-outlined text-2xl">tune</span></div>
+<div class="flex flex-col gap-1">
+<h2 class="text-base font-bold leading-tight text-text-primary-light dark:text-text-primary-dark">Simplified Management</h2>
+<p class="text-sm font-normal leading-normal text-text-secondary-light dark:text-text-secondary-dark">Launch, monitor, and manage all your Meta ad campaigns from a single, intuitive dashboard.</p>
+</div>
+</div>
+<div class="flex flex-1 flex-col gap-3 rounded-xl border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark p-4">
+<div class="text-primary"><span class="material-symbols-outlined text-2xl">bar_chart</span></div>
+<div class="flex flex-col gap-1">
+<h2 class="text-base font-bold leading-tight text-text-primary-light dark:text-text-primary-dark">Data-Driven Insights</h2>
+<p class="text-sm font-normal leading-normal text-text-secondary-light dark:text-text-secondary-dark">Get clear, actionable reports that show you what's working and how to improve performance.</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+</div>
+</div>
+</body></html>

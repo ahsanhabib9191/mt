@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Campaign Creation Form</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+<script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#13ec80",
+            "background-light": "#f6f8f7",
+            "background-dark": "#102219",
+          },
+          fontFamily: {
+            "display": ["Inter", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+</head>
+<body class="font-display">
+<div class="relative flex h-auto min-h-screen w-full flex-col bg-background-light dark:bg-background-dark group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<div class="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-40 flex flex-1 justify-center py-5">
+<div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-white/10 dark:border-b-[#283930] px-4 md:px-10 py-3">
+<div class="flex items-center gap-4 text-black dark:text-white">
+<div class="size-6 text-primary">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-black dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">Shothik.ai</h2>
+</div>
+<div class="flex flex-1 justify-end gap-4 md:gap-8">
+<div class="flex gap-2">
+<button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-white/10 dark:bg-[#283930] text-black dark:text-white gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-white/10 dark:bg-[#283930] text-black dark:text-white gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5">
+<span class="material-symbols-outlined">help</span>
+</button>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="User profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAMwqVHFkv3SRuvS1bHsqBbrBQSTJR8YDqP9Ex0TNm1oK36AIIPUti4QqLTPqbtEP_7rsvKY1MFKQzNO9YGSCqyrqpu-Goa8z5lva-VIINfM36bvrdp7geRHK6nwDzmXvCzyrGkc-VSi_qYbodu9F6v_k26zSUXpRtaf5w3_YRBc0prbk6itrFxAe8la9Y_NtBZDoK7SucY2oo_ccO28H_DZKFJYC2XAnBaSwxxoLJdZDwN_3eRXXdnX6shYiFvpJOutCw_CHvWpkY");'></div>
+</div>
+</header>
+<main class="flex-1 mt-8 px-4 md:px-10">
+<div class="flex flex-wrap justify-between gap-4 py-4"><p class="text-black dark:text-white text-4xl font-black leading-tight tracking-[-0.033em] min-w-72">Create New Campaign</p></div>
+<div class="flex flex-col gap-3 py-4">
+<div class="flex gap-6 justify-between"><p class="text-gray-600 dark:text-white/80 text-base font-medium leading-normal">Step 1 of 4</p></div>
+<div class="rounded-full bg-white/10 dark:bg-[#3b5447] h-2"><div class="h-2 rounded-full bg-primary" style="width: 25%;"></div></div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
+<div class="lg:col-span-2 flex flex-col gap-8">
+<div class="bg-white dark:bg-[#111814] border border-white/10 dark:border-transparent rounded-xl">
+<h2 class="text-black dark:text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-6 py-5 border-b border-white/10 dark:border-b-[#283930]">Campaign Details</h2>
+<div class="p-6 grid grid-cols-1 gap-6">
+<label class="flex flex-col w-full">
+<p class="text-gray-800 dark:text-white text-base font-medium leading-normal pb-2">Campaign Name</p>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-black dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-gray-300 dark:border-[#3b5447] bg-white dark:bg-[#1c2721] focus:border-primary/80 h-14 placeholder:text-gray-500 dark:placeholder:text-[#9db9ab] p-[15px] text-base font-normal leading-normal" placeholder="e.g. Summer Sale Campaign" value=""/>
+</label>
+<label class="flex flex-col w-full">
+<p class="text-gray-800 dark:text-white text-base font-medium leading-normal pb-2">Product/Service Description</p>
+<textarea class="form-textarea flex w-full min-w-0 flex-1 resize-y overflow-hidden rounded-lg text-black dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-gray-300 dark:border-[#3b5447] bg-white dark:bg-[#1c2721] focus:border-primary/80 min-h-28 placeholder:text-gray-500 dark:placeholder:text-[#9db9ab] p-[15px] text-base font-normal leading-normal" placeholder="Describe the product or service you are promoting."></textarea>
+</label>
+<label class="flex flex-col w-full">
+<p class="text-gray-800 dark:text-white text-base font-medium leading-normal pb-2">Landing Page URL</p>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-black dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-gray-300 dark:border-[#3b5447] bg-white dark:bg-[#1c2721] focus:border-primary/80 h-14 placeholder:text-gray-500 dark:placeholder:text-[#9db9ab] p-[15px] text-base font-normal leading-normal" placeholder="https://example.com/summer-sale" value=""/>
+</label>
+</div>
+</div>
+<div class="bg-white dark:bg-[#111814] border border-white/10 dark:border-transparent rounded-xl">
+<h2 class="text-black dark:text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-6 py-5 border-b border-white/10 dark:border-b-[#283930]">Campaign Goal</h2>
+<div class="p-6">
+<p class="text-gray-800 dark:text-white text-base font-medium leading-normal pb-3">What's your primary objective?</p>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+<label class="flex cursor-pointer items-center gap-4 rounded-lg border-2 border-primary bg-primary/20 dark:bg-primary/10 p-4 transition-all">
+<input checked="" class="form-radio text-primary bg-transparent border-gray-400 dark:border-[#3b5447] focus:ring-primary" name="objective" type="radio"/>
+<span class="font-semibold text-black dark:text-white">Sales</span>
+</label>
+<label class="flex cursor-pointer items-center gap-4 rounded-lg border-2 border-transparent hover:border-primary/50 p-4 transition-all">
+<input class="form-radio text-primary bg-transparent border-gray-400 dark:border-[#3b5447] focus:ring-primary" name="objective" type="radio"/>
+<span class="font-semibold text-gray-700 dark:text-white/80">Leads</span>
+</label>
+<label class="flex cursor-pointer items-center gap-4 rounded-lg border-2 border-transparent hover:border-primary/50 p-4 transition-all">
+<input class="form-radio text-primary bg-transparent border-gray-400 dark:border-[#3b5447] focus:ring-primary" name="objective" type="radio"/>
+<span class="font-semibold text-gray-700 dark:text-white/80">Traffic</span>
+</label>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-[#111814] border border-white/10 dark:border-transparent rounded-xl">
+<h2 class="text-black dark:text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-6 py-5 border-b border-white/10 dark:border-b-[#283930]">Budget &amp; Schedule</h2>
+<div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="flex flex-col w-full">
+<div class="flex justify-between items-center pb-2">
+<p class="text-gray-800 dark:text-white text-base font-medium leading-normal">Daily Budget</p>
+<span class="text-black dark:text-white font-bold text-lg">$50</span>
+</div>
+<input class="w-full h-2 bg-gray-200 dark:bg-[#3b5447] rounded-lg appearance-none cursor-pointer accent-primary" max="1000" min="10" type="range" value="50"/>
+</div>
+<div class="flex flex-col w-full">
+<p class="text-gray-800 dark:text-white text-base font-medium leading-normal pb-2">Campaign Duration</p>
+<div class="relative">
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-black dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-gray-300 dark:border-[#3b5447] bg-white dark:bg-[#1c2721] focus:border-primary/80 h-14 placeholder:text-gray-500 dark:placeholder:text-[#9db9ab] p-[15px] pl-12 text-base font-normal leading-normal" placeholder="Select dates" value=""/>
+<div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
+<span class="material-symbols-outlined text-gray-500 dark:text-[#9db9ab]">calendar_today</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<aside class="lg:col-span-1">
+<div class="sticky top-8 bg-white dark:bg-[#111814] border border-white/10 dark:border-[#283930] rounded-xl p-6 flex flex-col gap-4">
+<h3 class="text-xl font-bold text-black dark:text-white">Audience Estimate</h3>
+<div class="flex justify-between items-baseline">
+<p class="text-gray-600 dark:text-white/70">Potential Reach</p>
+<p class="text-2xl font-bold text-primary">1.2M - 1.8M</p>
+</div>
+<div class="h-2 w-full bg-gray-200 dark:bg-[#3b5447] rounded-full">
+<div class="h-2 bg-gradient-to-r from-green-400 via-yellow-400 to-red-500 rounded-full" style="width: 60%;"></div>
+</div>
+<p class="text-sm text-gray-500 dark:text-white/60">Your audience selection is fairly broad. For better results, consider adding more specific interests or narrowing the location.</p>
+</div>
+</aside>
+</div>
+<div class="flex flex-col sm:flex-row items-center justify-end gap-4 py-8 mt-4 border-t border-white/10 dark:border-t-[#283930]">
+<button class="flex w-full sm:w-auto cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 text-black dark:text-white bg-transparent hover:bg-black/5 dark:hover:bg-white/5 gap-2 text-base font-bold leading-normal tracking-[0.015em] min-w-0 px-6 transition-colors">Cancel</button>
+<button class="flex w-full sm:w-auto cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 bg-gray-200 dark:bg-[#283930] text-black dark:text-white hover:bg-gray-300 dark:hover:bg-[#3b5447] gap-2 text-base font-bold leading-normal tracking-[0.015em] min-w-0 px-6 transition-colors">Save as Draft</button>
+<button class="flex w-full sm:w-auto cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 bg-primary text-background-dark gap-2 text-base font-bold leading-normal tracking-[0.015em] min-w-0 px-6 transition-opacity hover:opacity-90">Launch Campaign</button>
+</div>
+</main>
+</div>
+</div>
+</div>
+</div>
+</body></html>

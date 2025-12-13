@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #13ec80;
+  --color-background-light: #f6f8f7;
+  --color-background-dark: #111814;
+  --color-surface-light: #ffffff;
+  --color-surface-dark: #1c2721;
+  --color-border-light: #e0e4e2;
+  --color-border-dark: #3b5447;
+  --color-text-primary-light: #102219;
+  --color-text-primary-dark: #ffffff;
+  --color-text-secondary-light: #5a6862;
+  --color-text-secondary-dark: #9db9ab;
+  --color-success: #10B981;
+  --color-error: #EF4444;
+  --color-warning: #FFC107;
+
+  --font-display: "Inter", sans-serif;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+.material-symbols-outlined.filled {
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+body {
+  font-family: var(--font-display);
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@keyframes pulse-zoom {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.animate-pulse-zoom {
+  animation: pulse-zoom 3s ease-in-out infinite;
+}

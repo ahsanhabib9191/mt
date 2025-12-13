@@ -1,0 +1,43 @@
+# CODEOWNERS file for meta-ad repository
+# 
+# Code owners are automatically requested for review when someone opens a pull request
+# that modifies code that they own. The last matching pattern takes precedence.
+#
+# Documentation: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default owners for everything in the repo
+* @ahsanhabib9191
+
+# Database models and schemas
+/lib/db/models/ @ahsanhabib9191
+/lib/db/client.ts @ahsanhabib9191
+/lib/db/redis.ts @ahsanhabib9191
+
+# Security-critical files (authentication, encryption, middleware)
+/lib/middleware/auth.ts @ahsanhabib9191
+/lib/utils/crypto.ts @ahsanhabib9191
+/lib/middleware/rate-limit.ts @ahsanhabib9191
+
+# Configuration files
+/.github/ @ahsanhabib9191
+/docker-compose.yml @ahsanhabib9191
+/tsconfig.json @ahsanhabib9191
+/package.json @ahsanhabib9191
+/.env.example @ahsanhabib9191
+
+# Documentation
+/README.md @ahsanhabib9191
+/CONTRIBUTING.md @ahsanhabib9191
+/META_ADS_OPTIMIZATION_STRATEGY.md @ahsanhabib9191
+/.github/copilot-instructions.md @ahsanhabib9191
+
+# Meta API integration
+/lib/services/meta-sync/ @ahsanhabib9191
+/lib/utils/meta-scopes.ts @ahsanhabib9191
+/lib/webhooks/meta.ts @ahsanhabib9191
+
+# Example API routes
+/examples/api/ @ahsanhabib9191
+
+# Migration scripts and test utilities
+/scripts/ @ahsanhabib9191

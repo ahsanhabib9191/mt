@@ -1,0 +1,29 @@
+FROM node:18-alpine AS builder
+
+WORKDIR /app
+
+# Install dependencies
+COPY package*.json ./
+RUN npm ci
+
+# Copy source
+COPY . .
+
+# Build TypeScript
+RUN npm run build
+
+# Production Stage
+FROM node:18-alpine
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm ci --only=production
+
+COPY --from=builder /app/dist ./dist
+# Copy raw scripts if needed (some rely on ts-node, in prod we should compile them or stick to node)
+# Copy .env.example as .env fallback? No, inject env vars.
+
+EXPOSE 3000
+
+CMD ["npm", "start"]

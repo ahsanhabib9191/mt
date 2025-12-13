@@ -1,0 +1,109 @@
+version: "3.9"
+
+services:
+  # 1. API Backend
+  api_server:
+    build:
+      context: .
+      dockerfile: Dockerfile.server
+    container_name: meta_api
+    restart: always
+    ports:
+      - "3000:3000"
+    env_file: .env
+    environment:
+      - PORT=3000
+      - MONGODB_URI=mongodb://meta_mongo:27017/meta-data
+      - REDIS_URL=redis://meta_redis:6379
+      - NODE_ENV=production
+      - CORS_ORIGIN=*
+      - OPTIMIZATION_MODE=ACTIVE
+      # Add Meta App ID/Secret variables here or via .env file
+    depends_on:
+      mongo:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  # 2. Frontend Client
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: meta_client
+    restart: always
+    ports:
+      - "8080:80"
+    depends_on:
+      - api_server
+
+  # 3. Launch Worker (Async Jobs)
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile.server
+    container_name: meta_worker
+    restart: always
+    command: [ "node", "dist/scripts/launch-worker-process.js" ]
+    env_file: .env
+    environment:
+      - MONGODB_URI=mongodb://meta_mongo:27017/meta-data
+      - REDIS_URL=redis://meta_redis:6379
+      - NODE_ENV=production
+    depends_on:
+      mongo:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  # 4. Optimization Brain (Periodic 5m)
+  optimizer:
+    build:
+      context: .
+      dockerfile: Dockerfile.server
+    container_name: meta_optimizer
+    restart: always
+    command: >
+      sh -c "while true; do node dist/scripts/run-optimization.js; echo 'Sleeping...'; sleep 300; done"
+    env_file: .env
+    environment:
+      - MONGODB_URI=mongodb://meta_mongo:27017/meta-data
+      - NODE_ENV=production
+      - OPTIMIZATION_MODE=ACTIVE
+    depends_on:
+      mongo:
+        condition: service_healthy
+
+  # 5. Database
+  mongo:
+    image: mongo:6.0
+    container_name: meta_mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_prod_data:/data/db
+    healthcheck:
+      test: [ "CMD", "mongo", "--quiet", "--eval", "db.runCommand({ ping: 1 })" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # 5. Cache
+  redis:
+    image: redis:7
+    container_name: meta_redis
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_prod_data:/data
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  mongo_prod_data:
+  redis_prod_data:

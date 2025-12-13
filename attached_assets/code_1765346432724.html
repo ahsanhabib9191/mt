@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Shothik.ai Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#13ec80",
+              "background-light": "#f6f8f7",
+              "background-dark": "#111814",
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark">
+<div class="relative flex h-auto min-h-screen w-full flex-col">
+<div class="flex h-full w-full grow">
+<aside class="flex h-full min-h-screen w-64 flex-col justify-between border-r border-solid border-white/10 bg-background-light dark:bg-background-dark p-4">
+<div class="flex flex-col gap-8">
+<div class="flex items-center gap-3 px-3 text-white">
+<div class="size-6">
+<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-white text-xl font-bold leading-tight tracking-[-0.015em]">Shothik.ai</h2>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-3 rounded-lg bg-primary/20 px-3 py-2">
+<span class="material-symbols-outlined text-primary">dashboard</span>
+<p class="text-primary text-sm font-medium leading-normal">Dashboard</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2">
+<span class="material-symbols-outlined text-white/70">campaign</span>
+<p class="text-white/70 text-sm font-medium leading-normal">Campaigns</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2">
+<span class="material-symbols-outlined text-white/70">analytics</span>
+<p class="text-white/70 text-sm font-medium leading-normal">Analytics</p>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-3 px-3 py-2">
+<span class="material-symbols-outlined text-white/70">settings</span>
+<p class="text-white/70 text-sm font-medium leading-normal">Settings</p>
+</div>
+</div>
+<div class="flex items-center gap-3 border-t border-solid border-white/10 pt-4">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="User profile avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAqnSfwIKTF7eIw-hDkAkqv2hINOiuX7ZXjKuK4QLaTnayAwVsroNToPZcY6KudyoaRXEeUKio5p97hYiK1hoXmrN2RfLOOxmV3QOt54pMYVa-YOYvRRTrY9ZSKMFvGu_7lkAGl3FYOqVEt476VnO_-19-pcpQDi995kJ8vQB9lqrKe9zN0F0VJWZkZN5VnV0FGrTWYGS30YK7DDlmw8fUJCgTYgQcrMo0lUPxl85AR51S21J53lNuSShMJH330ES-9MGYk55Jti5E");'></div>
+<div class="flex flex-col">
+<h1 class="text-white text-sm font-medium leading-normal">John Doe</h1>
+<p class="text-primary text-xs font-normal leading-normal">Connected</p>
+</div>
+</div>
+</div>
+</aside>
+<main class="w-full flex-1 p-8">
+<div class="mx-auto flex max-w-7xl flex-col gap-8">
+<div class="flex flex-col gap-8 rounded-xl border border-solid border-white/10 p-8">
+<div class="flex flex-wrap items-center justify-between gap-4">
+<div class="flex flex-col gap-2">
+<p class="text-white text-3xl font-bold leading-tight tracking-[-0.033em]">Welcome to Shothik.ai</p>
+<p class="text-[#9db9ab] text-base font-normal leading-normal">Connect your Facebook account to get started with ad automation.</p>
+</div>
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-primary text-[#111814] text-base font-bold leading-normal tracking-[0.015em]">
+<span class="truncate">Connect Facebook Account</span>
+</button>
+</div>
+</div>
+<div class="flex flex-col gap-8">
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em]">Primary Setup</h2>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg h-10 px-4 bg-white/10 text-white text-sm font-medium leading-normal">
+<span class="material-symbols-outlined text-sm">edit</span>
+<span class="truncate">Change Setup</span>
+</button>
+</div>
+<div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+<div class="flex flex-col gap-4 rounded-lg border border-solid border-primary/50 bg-primary/10 p-5">
+<div class="flex items-center justify-between">
+<h3 class="text-white text-base font-semibold">Primary Ad Account</h3>
+<div class="flex items-center gap-2 rounded-full bg-primary/20 px-3 py-1 text-xs font-medium text-primary">
+<div class="size-2 rounded-full bg-primary"></div>
+<span>Active</span>
+</div>
+</div>
+<div class="flex flex-col">
+<p class="text-white text-lg">Starlight - Main Campaign</p>
+<p class="text-sm text-gray-400">ID: act_1234567890123</p>
+</div>
+</div>
+<div class="flex flex-col gap-4 rounded-lg border border-solid border-primary/50 bg-primary/10 p-5">
+<div class="flex items-center justify-between">
+<h3 class="text-white text-base font-semibold">Associated Pixel</h3>
+<div class="flex items-center gap-2 rounded-full bg-primary/20 px-3 py-1 text-xs font-medium text-primary">
+<div class="size-2 rounded-full bg-primary"></div>
+<span>Active</span>
+</div>
+</div>
+<div class="flex flex-col">
+<p class="text-white text-lg">Starlight Main Pixel</p>
+<p class="text-sm text-gray-400">ID: 555123456789</p>
+</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em]">Your Business Managers</h2>
+<div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+<div class="flex flex-col gap-4 rounded-lg border border-solid border-white/10 bg-white/5 p-5">
+<div class="flex items-center gap-3">
+<div class="flex size-10 items-center justify-center rounded-lg bg-primary/20">
+<span class="material-symbols-outlined text-primary">business_center</span>
+</div>
+<h3 class="flex-1 text-white text-base font-semibold">Starlight Innovations Inc.</h3>
+</div>
+<p class="text-sm text-gray-400">ID: 987654321098765</p>
+</div>
+<div class="flex flex-col gap-4 rounded-lg border border-solid border-white/10 bg-white/5 p-5">
+<div class="flex items-center gap-3">
+<div class="flex size-10 items-center justify-center rounded-lg bg-primary/20">
+<span class="material-symbols-outlined text-primary">business_center</span>
+</div>
+<h3 class="flex-1 text-white text-base font-semibold">Quantum Leap Co.</h3>
+</div>
+<p class="text-sm text-gray-400">ID: 123456789012345</p>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em]">Ad Accounts Overview</h2>
+<div class="overflow-hidden rounded-lg border border-solid border-white/10">
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-white/5">
+<tr>
+<th class="p-4 text-sm font-semibold text-white">Account Name</th>
+<th class="p-4 text-sm font-semibold text-white">Total Spend</th>
+<th class="p-4 text-sm font-semibold text-white">Account Age</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-white/10">
+<tr>
+<td class="p-4 text-sm text-gray-300">Starlight - Main Campaign</td>
+<td class="p-4 text-sm text-gray-300">$15,234.87</td>
+<td class="p-4 text-sm text-gray-300">2 years, 3 months</td>
+</tr>
+<tr>
+<td class="p-4 text-sm text-gray-300">Quantum - Product Launch</td>
+<td class="p-4 text-sm text-gray-300">$8,750.12</td>
+<td class="p-4 text-sm text-gray-300">8 months</td>
+</tr>
+<tr>
+<td class="p-4 text-sm text-gray-300">Personal Ad Account</td>
+<td class="p-4 text-sm text-gray-300">$1,050.50</td>
+<td class="p-4 text-sm text-gray-300">5 years</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
+<div class="flex flex-col gap-4">
+<h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em]">Connected Pages</h2>
+<div class="flex flex-col gap-4 rounded-lg border border-solid border-white/10 bg-white/5 p-5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-lg bg-cover bg-center bg-no-repeat" data-alt="Starlight Innovations company logo" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDTtRTrN2UHFTEVtbGJEfkF6HSBOkyaYsg8KPoqxO5BYyB2P7eoscEIKj_bwAemdfj8l6mjA9zxqCuPj7resIiYwzyVCVOaO3C7seY3lwt7nSWzzUshwYPXfF9wqJ90udHxiHow9c6UFXXpiiPHmE49G9_LZFfM-V2n_YIy35ZbCUajOdX8bq6Xq2JgDGUM55Kkzw8oPq9C5kpLQ39k4P6f--rU59INPORaCfn9z5weS_bsfrRD4O2PKwKGsna_6PNNdSQ_pYDkGCc')"></div>
+<p class="text-base text-white">Starlight Innovations Inc.</p>
+</div>
+<div class="rounded-full bg-primary/20 px-3 py-1 text-xs font-medium text-primary">Business</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-lg bg-cover bg-center bg-no-repeat" data-alt="Quantum Leap Co. company logo" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDaJytswYUeDzEVw4Rmofp-MgfFZh_HjI8eaDjScmy5IHGeG5GQiOX6xP-EArDWLDMfEu9iSt8dM_ao187IbHVz7HqRRJ5A5jjbCOGURvrL2fp8zTwD3aaHKA7gA8P6fxR4aQ3QMlXUKAotU4BaEDPxKGijsMPdgwhbCtfciIm1Oz8MIL62169uWOSKRlIbP6_FQHbmfwVOYrfVz9ppt-7UeYLq33pdI4ZOLkedaU6Pq9MXEVNDihnxVMBYEtG47ojtxD9hpW67cdE')"></div>
+<p class="text-base text-white">Quantum Leap Co.</p>
+</div>
+<div class="rounded-full bg-primary/20 px-3 py-1 text-xs font-medium text-primary">Business</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-lg bg-cover bg-center bg-no-repeat" data-alt="John Doe's personal profile picture" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBtVCoYGkXmH2O4caoEsNJteZ9ybzXxUxUlU0YibX8r55tR2zhDJtFGYmSQVGq6quITSNYod33LJlXRNn4mvgGk0GPMmWyg8n5d83iAE7_T-_zdn9izPTUkQIZHInKxAQqA2pZE-jV0x6TxJrA_1Z1eNACJ7cT2ARvsGKGIcMGVKZCSMBN4LyGOhIbjsHt_iJYPOYOQyYSQVC-5CxDtHay8uYaYPQQ7kGdDVSzK_8b669fdj2rxahIX1rZZlyo7YeVDnBPH0I4c_kg')"></div>
+<p class="text-base text-white">John Doe's Page</p>
+</div>
+<div class="rounded-full bg-gray-500/20 px-3 py-1 text-xs font-medium text-gray-300">Personal</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em]">Meta Pixels</h2>
+<div class="flex flex-col gap-4 rounded-lg border border-solid border-white/10 bg-white/5 p-5">
+<div class="flex flex-col gap-2">
+<p class="text-base font-medium text-white">Starlight Main Pixel</p>
+<p class="text-sm text-gray-400">ID: 555123456789</p>
+<p class="text-sm text-primary">1.2k PageViews in last 7 days</p>
+</div>
+<hr class="border-white/10"/>
+<div class="flex flex-col gap-2">
+<p class="text-base font-medium text-white">Quantum Leap Pixel</p>
+<p class="text-sm text-gray-400">ID: 555987654321</p>
+<p class="text-sm text-primary">876 Purchase events in last 7 days</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+</body></html>
