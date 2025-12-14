@@ -2,27 +2,27 @@
 # Test script to verify git diff operations work correctly
 # This simulates what GitHub Copilot workflows do
 
-set -e
+set -euo pipefail
 
 echo "🔍 Testing git diff operations..."
 echo ""
 
-# Check if main branch ref exists
-echo "1. Checking if refs/heads/main exists..."
-if git show-ref --verify --quiet refs/heads/main; then
-  echo "✅ refs/heads/main exists"
+# Check if origin/main remote ref exists (this is what's needed for git diff)
+echo "1. Checking if refs/remotes/origin/main exists..."
+if git show-ref --verify --quiet refs/remotes/origin/main; then
+  echo "✅ refs/remotes/origin/main exists"
 else
-  echo "⚠️  refs/heads/main does not exist locally"
+  echo "❌ refs/remotes/origin/main does not exist - this would cause the workflow to fail"
+  exit 1
 fi
 
-# Check if origin/main exists
+# Check if local main branch exists (optional, not required for git diff)
 echo ""
-echo "2. Checking if origin/main exists..."
-if git show-ref --verify --quiet refs/remotes/origin/main; then
-  echo "✅ origin/main exists"
+echo "2. Checking if local refs/heads/main exists..."
+if git show-ref --verify --quiet refs/heads/main; then
+  echo "✅ refs/heads/main exists locally"
 else
-  echo "❌ origin/main does not exist - this would cause the workflow to fail"
-  exit 1
+  echo "ℹ️  refs/heads/main does not exist locally (this is OK, we can use origin/main)"
 fi
 
 # Test git diff against main
@@ -48,7 +48,10 @@ fi
 # Show available branches
 echo ""
 echo "5. Available branches:"
-git branch -a | head -10
+echo "   Local branches:"
+git branch | head -5 || echo "   (none)"
+echo "   Remote branches:"
+git branch -r | head -5 || echo "   (none)"
 
 # Show git fetch configuration
 echo ""
