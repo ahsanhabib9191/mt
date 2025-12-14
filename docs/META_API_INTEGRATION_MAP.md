@@ -40,13 +40,13 @@ A quick, tactical map for how this repository integrates with the Meta (Facebook
 
 ## Error, Rate, and Safety Guardrails
 
-- **Rate Limits**: Warnings at ~180 calls/hour; backoff and retries for code 17/4; no retry for code 100.
+- **Rate Limits**: Warnings at ~180 calls/hour; backoff and retries for Meta error codes 17 and 4; no retry for code 100.
 - **Token Expiry**: Code 190 triggers refresh; if refresh fails, connection is marked expired.
 - **Security**: No tokens logged; encryption via `lib/utils/crypto.ts`; signatures verified for webhooks.
 
 ## Where to Dive Deeper
 
-- OAuth specifics: [`docs/META_OAUTH_INTEGRATION.md`](META_OAUTH_INTEGRATION.md)
-- Setup checklist: [`docs/META_API_SETUP.md`](META_API_SETUP.md)
-- Sync internals: [`docs/META_SYNC_SERVICE.md`](META_SYNC_SERVICE.md)
+- OAuth specifics: [`META_OAUTH_INTEGRATION.md`](META_OAUTH_INTEGRATION.md)
+- Setup checklist: [`META_API_SETUP.md`](META_API_SETUP.md)
+- Sync internals: [`META_SYNC_SERVICE.md`](META_SYNC_SERVICE.md)
 - Optimization logic: [`META_ADS_OPTIMIZATION_STRATEGY.md`](../META_ADS_OPTIMIZATION_STRATEGY.md)
