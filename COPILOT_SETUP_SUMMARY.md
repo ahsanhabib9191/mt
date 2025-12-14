@@ -3,6 +3,12 @@
 ## Overview
 This PR implements comprehensive GitHub Copilot configuration for the Meta Ads Optimization repository, following best practices for AI-assisted development while maintaining security and code quality standards.
 
+## Quick Setup Checklist
+1. Confirm the Copilot assets are present: `.github/copilot-instructions.md`, `.github/CODEOWNERS`, `SECURITY.md`, `docs/copilot-validation.md`, and `scripts/security-scan.sh` (executable).
+2. Install dependencies and verify the scanner: `npm install && npm run security:scan` (expects no issues).
+3. Enable CODEOWNERS enforcement in branch protection so security-critical files always request the right reviewers.
+4. Share the Copilot usage docs (`README.md`, `CONTRIBUTING.md`, `SECURITY.md`) with contributors before enabling Copilot suggestions in this repo.
+
 ## Changes Made
 
 ### 1. Code Ownership (.github/CODEOWNERS)
