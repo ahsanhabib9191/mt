@@ -88,6 +88,7 @@ See `lib/mcp/README.md` for details and examples.
 
 *   [Features List](FEATURES.md) - Detailed breakdown of capabilities.
 *   [Project Structure](PROJECT_STRUCTURE.md) - Map of the codebase.
+*   [Database Map](DATABASE_MAP.md) - Giant Tech view of collections, indexes, and relationships.
 *   [Optimization Strategy](META_ADS_OPTIMIZATION_STRATEGY.md) - How the AI thinks.
 *   [OAuth Guide](docs/META_OAUTH_INTEGRATION.md) - Connecting Real Accounts.
 
