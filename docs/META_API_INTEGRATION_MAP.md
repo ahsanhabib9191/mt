@@ -49,4 +49,4 @@ A quick, tactical map for how this repository integrates with the Meta (Facebook
 - OAuth specifics: [`META_OAUTH_INTEGRATION.md`](META_OAUTH_INTEGRATION.md)
 - Setup checklist: [`META_API_SETUP.md`](META_API_SETUP.md)
 - Sync internals: [`META_SYNC_SERVICE.md`](META_SYNC_SERVICE.md)
-- Optimization logic: [`META_ADS_OPTIMIZATION_STRATEGY.md`](/META_ADS_OPTIMIZATION_STRATEGY.md)
+- Optimization logic: [`META_ADS_OPTIMIZATION_STRATEGY.md`](../META_ADS_OPTIMIZATION_STRATEGY.md)
