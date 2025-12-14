@@ -21,8 +21,13 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(helmet());
+
+const corsOrigin = process.env.CORS_ORIGIN || 'http://localhost:3000';
+if (process.env.NODE_ENV === 'production' && corsOrigin === '*') {
+  logger.warn('CORS_ORIGIN is set to "*" in production - this is insecure. Set CORS_ORIGIN to your dashboard origin or review SECURITY.md for guidance.');
+}
 app.use(cors({
-  origin: process.env.CORS_ORIGIN || '*',
+  origin: corsOrigin,
   credentials: true,
 }));
 app.use(express.json());
@@ -49,6 +54,45 @@ app.use('/api/launch', launchRoutes);
 app.use('/webhooks', webhookRoutes);
 
 app.use(errorHandler);
+
+// Startup environment validation to fail fast in production if required secrets are missing
+function validateRequiredEnv() {
+  const required = [
+    { key: 'MONGODB_URI', reason: 'MongoDB connection string is required for data storage' },
+    { key: 'REDIS_URL', reason: 'Redis connection string is required for cache and rate-limiting' },
+    { key: 'ENCRYPTION_KEY', reason: 'Encryption key (32 bytes, 64 hex chars) is required to encrypt sensitive data' },
+    { key: 'NEXTAUTH_SECRET', reason: 'NEXTAUTH_SECRET is required for signing JWTs' },
+  ];
+
+  const missing: string[] = [];
+
+  for (const item of required) {
+    const val = process.env[item.key];
+    if (!val || val.trim() === '') {
+      missing.push(`${item.key}: ${item.reason}`);
+    }
+  }
+
+  // ENCRYPTION_KEY additional validation: must be 64 hex chars (32 bytes)
+  const enc = process.env.ENCRYPTION_KEY || '';
+  if (enc && !/^[0-9a-fA-F]{64}$/.test(enc)) {
+    logger.error('ENCRYPTION_KEY format invalid: expected 64 hex characters (32 bytes).');
+    // Treat as missing/invalid
+    missing.push('ENCRYPTION_KEY: invalid format (expected 64 hex chars)');
+  }
+
+  if (missing.length > 0) {
+    logger.error('Missing or invalid required environment variables. Aborting startup.');
+    missing.forEach((m) => logger.error(m));
+    // Provide brief guidance
+    logger.error('Copy .env.example to .env and populate required values; see DEPLOYMENT_GUIDE.md and SECURITY.md for production guidance.');
+    // Exit with non-zero so orchestrators know the start failed
+    process.exit(1);
+  }
+}
+
+// Run validations before starting services
+validateRequiredEnv();
 
 async function startServer() {
   try {

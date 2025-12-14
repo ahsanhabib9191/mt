@@ -26,42 +26,55 @@ cd mt
 
 ### Step 2: Configure Environment Variables
 
-Create a `.env` file in the root directory:
+The authoritative list of environment variables is in `.env.example`. For production, copy that file and set secure values. The snippet below is a production‑oriented subset derived from `.env.example` — it is not a replacement for the canonical file.
 
 ```bash
 cp .env.example .env
 ```
 
-Edit `.env` with your settings:
+Edit `.env` with your production settings. The example below shows only the common production subset and highlights required keys.
 
 ```env
-# Database
-MONGODB_URI=mongodb://meta_mongo:27017/meta-data
-REDIS_URL=redis://meta_redis:6379
+# -- Required (production) -----------------
+MONGODB_URI=mongodb://meta_mongo:27017/meta-data   # mandatory: production Mongo connection
+REDIS_URL=redis://meta_redis:6379                  # mandatory: production Redis
+ENCRYPTION_KEY=your-64-hex-chars-32byte-key         # mandatory: 32 bytes (64 hex chars)
+NEXTAUTH_SECRET=your-jwt-secret-here                # mandatory: JWT signing secret
 
-# Security (Generate a random 32-byte key)
-ENCRYPTION_KEY=your-32-byte-encryption-key-here
-NEXTAUTH_SECRET=your-jwt-secret-here
+# Meta / OAuth (required only when connecting real Meta accounts)
+META_APP_ID=                                           # optional for Mock Mode; required for real Meta
+META_APP_SECRET=                                       # optional for Mock Mode; required for real Meta
+META_VERIFY_TOKEN=your_webhook_verify_token           # required if registering webhooks
+META_WEBHOOK_SECRET=your_meta_webhook_secret          # required for webhook signature verification
 
-# Meta API (Optional - Leave blank for Mock Mode)
-META_APP_ID=
-META_APP_SECRET=
-
-# Optimization
-OPTIMIZATION_MODE=MONITOR  # or ACTIVE for auto-execution
-
-# Server
+# -- Recommended / optional ----------------
 PORT=3000
 NODE_ENV=production
-CORS_ORIGIN=*
+LOG_LEVEL=info
+
+# OPTIMIZATION_MODE controls automated behavior. Use MONITOR for observation-only, ACTIVE to enable automated changes
+OPTIMIZATION_MODE=MONITOR  # values: MONITOR | ACTIVE
+
+# CORS origin: prefer a concrete dashboard origin in production (example below)
+CORS_ORIGIN=https://dashboard.yourdomain.com
+
+# Rate Limiting (optional)
+RATE_LIMIT_ENABLED=true
+RATE_LIMIT_WINDOW_MS=900000
+RATE_LIMIT_MAX_REQUESTS=100
 ```
+
+Notes:
+- ENCRYPTION_KEY must be a 32-byte key expressed as 64 hexadecimal characters. See SECURITY.md for details on key management.
+- Leave `META_APP_ID` and `META_APP_SECRET` empty to run in Mock Mode (no real ad spend). If you populate them, the system will attempt to operate against real Meta APIs — see the "Mock Mode vs Real Meta" section below.
+- `OPTIMIZATION_MODE` should be set in `.env`. The `docker-compose.prod.yml` intentionally avoids hardcoding this value to prevent accidental overrides.
 
 **To generate secure keys:**
 ```bash
-# Encryption key (32 bytes)
+# Encryption key (32 bytes -> 64 hex chars)
 node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 
-# JWT secret
+# JWT secret (recommended 64+ bytes)
 node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"
 ```
 
@@ -89,13 +102,31 @@ Check if all containers are running:
 docker compose -f docker-compose.prod.yml ps
 ```
 
-You should see:
-- `meta_client` (Frontend) - Port 8080
-- `meta_api` (Backend) - Port 3000
-- `meta_worker` (Background Jobs)
-- `meta_optimizer` (AI Brain)
-- `meta_mongo` (Database)
-- `meta_redis` (Cache)
+You should see service names like:
+- `api_server` (service) → container `meta_api` - Port 3000
+- `client` (service) → container `meta_client` - Port 8080
+- `worker` (service) → container `meta_worker`
+- `optimizer` (service) → container `meta_optimizer`
+- `mongo` (service) → container `meta_mongo`
+- `redis` (service) → container `meta_redis`
+
+Important note on identifiers:
+- This guide uses service names (e.g., `api_server`) when running `docker compose` commands. The `container_name` values (e.g., `meta_api`) are the actual container names. Use the service name with `docker compose` commands for portability, and use container names with `docker` commands when interacting directly with containers.
+
+Quick checks (service-focused):
+
+```bash
+# Show services and their status
+docker compose -f docker-compose.prod.yml ps
+
+# View logs for the API service (use service name)
+docker compose -f docker-compose.prod.yml logs -f api_server
+
+# Restart the API service (use service name)
+docker compose -f docker-compose.prod.yml restart api_server
+```
+
+If you prefer container-level commands (not recommended for compose-managed clusters), reference the container names printed by `docker compose ps`.
 
 ### Step 5: Access the Application
 
@@ -105,48 +136,18 @@ Open your browser:
 
 ---
 
-## 🎯 What to Do Next
+## 🎯 Mock Mode vs Real Meta Account (Safety and Toggles)
 
-### Option A: Test with Mock Mode (Recommended First)
+Mock Mode is the safe default for testing and demos. The application operates in mock mode when Meta credentials are not provided.
 
-Mock Mode lets you test the entire system without spending real money.
+Toggle rules (explicit):
+- If `META_APP_ID` or `META_APP_SECRET` in `.env` are empty/undefined, the system runs in Mock Mode (no real ad spend).
+- If both `META_APP_ID` and `META_APP_SECRET` are set, the app will attempt to use the real Meta API and may perform actions that result in real ad spend.
+- `OPTIMIZATION_MODE=ACTIVE` enables automated optimization actions (budget changes, pausing ads). Set `OPTIMIZATION_MODE=MONITOR` in staging or when you want observation-only behavior.
 
-1. **Access Dashboard**: http://localhost:8080
-2. **Click "Boost"** to create a campaign
-3. **Fill in campaign details** (use any URL, the scraper will simulate data)
-4. **Launch Campaign** - It will be queued and processed
-5. **Check Dashboard** - View the "Activity Feed" for AI recommendations
+WARNING: Connecting real Meta credentials and enabling `OPTIMIZATION_MODE=ACTIVE` will allow the platform to make real changes to ad accounts and may incur costs. Only do this in production environments with appropriate approvals and budget controls in place.
 
-**Mock Mode Features:**
-- ✅ Simulated campaign launches
-- ✅ Fake performance data (clicks, spend, conversions)
-- ✅ AI optimization recommendations
-- ✅ No real money spent
-
-### Option B: Connect Real Meta Account
-
-To manage real Facebook/Instagram ads:
-
-1. **Get Meta Credentials**:
-   - Go to [developers.facebook.com](https://developers.facebook.com)
-   - Create an App (Marketing API)
-   - Copy `App ID` and `App Secret`
-
-2. **Update `.env`**:
-   ```env
-   META_APP_ID=your_real_app_id
-   META_APP_SECRET=your_real_app_secret
-   ```
-
-3. **Restart Services**:
-   ```bash
-   docker compose -f docker-compose.prod.yml restart api_server
-   ```
-
-4. **Connect Account**:
-   - Go to Dashboard
-   - Click "Connect with Facebook"
-   - Authorize your ad account
+If your deployment needs an explicit safety flag, set an additional environment variable (for example `FORCE_REAL_META=true`) and gate any production runbooks on its presence. The codebase checks for mock tokens (e.g., access tokens beginning with `mock_`) and will bypass live API calls when a mock token is detected. See `lib/services/meta-sync/graph-client.ts` and `lib/services/meta-sync/sync-service.ts` for mock token handling and logic.
 
 ---
 
@@ -166,7 +167,7 @@ docker compose -f docker-compose.prod.yml logs -f optimizer
 ### Restart Services
 
 ```bash
-# Restart all
+# Restart all (service names)
 docker compose -f docker-compose.prod.yml restart
 
 # Restart specific service
@@ -194,73 +195,60 @@ docker compose -f docker-compose.prod.yml up -d --build
 
 ---
 
-## 🧪 Testing the Optimization Engine
+## 🧪 Post-Deployment Validation
 
-The AI "Brain" runs automatically every 5 minutes. To trigger it manually:
+After the basic health checks, perform deeper validations to ensure the deployment is functioning end-to-end.
+
+1. Check API health endpoint:
 
 ```bash
-# Enter the optimizer container
-docker exec -it meta_optimizer sh
-
-# Run optimization manually
-node dist/scripts/run-optimization.js
-
-# Exit container
-exit
+curl -s http://localhost:3000/health | jq
 ```
 
-**What the Brain Does:**
-- Analyzes campaign performance (ROAS, CPA, CTR)
-- Identifies winners and losers
-- Recommends actions (Scale, Pause, Adjust)
-- Logs all decisions to the Activity Feed
-
----
-
-## 📊 Monitoring
-
-### Check Database
+2. Confirm MongoDB is accepting connections (use `mongosh` in the container):
 
 ```bash
-# Enter MongoDB container
-docker exec -it meta_mongo mongosh
+# Connect to mongo inside the compose cluster
+docker compose -f docker-compose.prod.yml exec mongo mongosh --eval "db.runCommand({ ping: 1 })"
+```
 
-# View databases
-show dbs
+Note: The production `docker-compose.prod.yml` uses `mongosh` for the MongoDB healthcheck because the older `mongo` shell is no longer included in MongoDB 6.x images.
 
-# Use meta-data database
-use meta-data
+3. Check Redis is responding:
 
-# View collections
-show collections
+```bash
+docker compose -f docker-compose.prod.yml exec redis redis-cli ping
+```
 
-# View campaigns
-db.campaigns.find().pretty()
+4. Run built-in test scripts from within the API container for end-to-end verification (examples):
 
+```bash
+# Enter API container
+docker compose -f docker-compose.prod.yml exec api_server sh
+
+# From inside the container run tests or scripts
+npm run test:db
+npm run test:auth
 # Exit
 exit
 ```
 
-### Check Redis Cache
+5. Run client E2E tests against the running stack (requires Playwright configured):
 
 ```bash
-# Enter Redis container
-docker exec -it meta_redis redis-cli
-
-# View all keys
-KEYS *
-
-# Exit
-exit
+# From host (or CI), run Playwright tests in client project
+cd client
+npm ci
+npm run test:e2e
 ```
+
+See `E2E_VERIFICATION_REPORT.md` and `README.md` for which tests are intended for CI vs manual verification.
 
 ---
 
 ## 🔧 Troubleshooting
 
 ### Port Already in Use
-
-If ports 3000 or 8080 are taken:
 
 ```bash
 # Find what's using the port
@@ -276,7 +264,7 @@ kill -9 <PID>
 ### Container Won't Start
 
 ```bash
-# View detailed logs
+# View detailed logs (use service name)
 docker compose -f docker-compose.prod.yml logs <service_name>
 
 # Rebuild from scratch
@@ -290,7 +278,7 @@ docker compose -f docker-compose.prod.yml up -d --build
 # Check if MongoDB is healthy
 docker compose -f docker-compose.prod.yml ps
 
-# Restart MongoDB
+# Restart MongoDB (service name)
 docker compose -f docker-compose.prod.yml restart mongo
 
 # Check MongoDB logs
@@ -326,18 +314,18 @@ docker compose -f docker-compose.prod.yml up -d --build client
 ### Option 2: Kubernetes
 
 Use the Docker images as base for K8s deployments:
-- `meta_api` → API Deployment
-- `meta_client` → Frontend Deployment
-- `meta_worker` → Worker Deployment
-- `meta_optimizer` → CronJob (every 5 minutes)
+- `api_server` → API Deployment
+- `client` → Frontend Deployment
+- `worker` → Worker Deployment
+- `optimizer` → CronJob (every 5 minutes)
 
 ### Option 3: AWS ECS/Fargate
 
 1. **Push images to ECR**:
-   ```bash
-   docker tag meta_api:latest <aws-account>.dkr.ecr.us-east-1.amazonaws.com/meta-api
-   docker push <aws-account>.dkr.ecr.us-east-1.amazonaws.com/meta-api
-   ```
+```bash
+docker tag meta_api:latest <aws-account>.dkr.ecr.us-east-1.amazonaws.com/meta-api
+docker push <aws-account>.dkr.ecr.us-east-1.amazonaws.com/meta-api
+```
 
 2. **Create ECS Task Definitions** for each service
 3. **Deploy to Fargate** with Application Load Balancer
@@ -371,14 +359,12 @@ If you encounter issues:
 - [ ] Repository cloned
 - [ ] `.env` file configured
 - [ ] `docker compose -f docker-compose.prod.yml up -d --build` executed
-- [ ] All 6 containers running (`docker compose ps`)
+- [ ] All containers running (`docker compose ps`)
 - [ ] Dashboard accessible at http://localhost:8080
 - [ ] API health check passing at http://localhost:3000/health
 - [ ] Test campaign created in Mock Mode
 - [ ] Activity Feed showing optimization logs
 
 **Estimated setup time:** 15-20 minutes
-
----
 
 *Built with ❤️ by the Giant Tech Team*

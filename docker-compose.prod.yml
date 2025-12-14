@@ -16,8 +16,9 @@ services:
       - MONGODB_URI=mongodb://meta_mongo:27017/meta-data
       - REDIS_URL=redis://meta_redis:6379
       - NODE_ENV=production
-      - CORS_ORIGIN=*
-      - OPTIMIZATION_MODE=ACTIVE
+      # CORS_ORIGIN and OPTIMIZATION_MODE are controlled via .env (see DEPLOYMENT_GUIDE.md)
+      # - CORS_ORIGIN=your_dashboard_origin_here
+      # - OPTIMIZATION_MODE=ACTIVE
       # Add Meta App ID/Secret variables here or via .env file
     depends_on:
       mongo:
@@ -69,7 +70,7 @@ services:
     environment:
       - MONGODB_URI=mongodb://meta_mongo:27017/meta-data
       - NODE_ENV=production
-      - OPTIMIZATION_MODE=ACTIVE
+      # OPTIMIZATION_MODE should be configured in .env (MONITOR or ACTIVE)
     depends_on:
       mongo:
         condition: service_healthy
@@ -84,7 +85,8 @@ services:
     volumes:
       - mongo_prod_data:/data/db
     healthcheck:
-      test: [ "CMD", "mongo", "--quiet", "--eval", "db.runCommand({ ping: 1 })" ]
+      # Use mongosh for the official mongo:6.0 image; the older 'mongo' shell was removed in 6.x
+      test: [ "CMD", "mongosh", "--quiet", "--eval", "db.runCommand({ ping: 1 })" ]
       interval: 10s
       timeout: 5s
       retries: 5
