@@ -1,0 +1,15 @@
+{
+  // Ensure VS Code uses the project's TypeScript version (node_modules/typescript)
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+
+  // Auto-select the workspace TypeScript SDK for this repo
+  "typescript.preferences.useAliasesForRenames": false,
+
+  // Prevent noise from VS Code's bundled TypeScript libs (/private/var/.../Visual Studio Code.app/...)
+  // being indexed alongside the workspace TypeScript installation.
+  "typescript.tsserver.exclude": [
+    "**/Visual Studio Code.app/**",
+    "**/AppTranslocation/**"
+  ]
+}
