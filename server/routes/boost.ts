@@ -410,7 +410,7 @@ async function scrapeUrl(url: string): Promise<ScrapedData> {
       .slice(0, 5000); // Increased text limit for better context
 
     const brandColors = extractBrandColors(html);
-  const pixel = detectPixel(html);
+    const pixel = detectPixel(html);
     const usp = extractUSP(html, title, description);
 
     const pageSpeed = {
