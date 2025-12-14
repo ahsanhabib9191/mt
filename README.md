@@ -80,6 +80,7 @@ Access at `http://localhost:5173`.
 *   [Project Structure](PROJECT_STRUCTURE.md) - Map of the codebase.
 *   [Optimization Strategy](META_ADS_OPTIMIZATION_STRATEGY.md) - How the AI thinks.
 *   [OAuth Guide](docs/META_OAUTH_INTEGRATION.md) - Connecting Real Accounts.
+*   [Meta API Integration Map](docs/META_API_INTEGRATION_MAP.md) - Quick map of requests, tokens, and storage.
 
 ---
 
