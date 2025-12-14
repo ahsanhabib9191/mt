@@ -48,12 +48,12 @@ router.get('/dashboard', async (req: Request, res: Response, next: NextFunction)
       }
     ]);
 
-    const m = stats[0] || { totalSpend: 0, totalImpressions: 0, totalClicks: 0, totalConversions: 0, totalRevenue: 0 };
+    const aggregatedMetrics = stats[0] || { totalSpend: 0, totalImpressions: 0, totalClicks: 0, totalConversions: 0, totalRevenue: 0 };
 
-    const ctr = m.totalImpressions > 0 ? (m.totalClicks / m.totalImpressions * 100) : 0;
-    const cpc = m.totalClicks > 0 ? (m.totalSpend / m.totalClicks) : 0;
-    const cpa = m.totalConversions > 0 ? (m.totalSpend / m.totalConversions) : 0;
-    const roas = m.totalSpend > 0 ? (m.totalRevenue / m.totalSpend) : 0;
+    const ctr = aggregatedMetrics.totalImpressions > 0 ? (aggregatedMetrics.totalClicks / aggregatedMetrics.totalImpressions * 100) : 0;
+    const cpc = aggregatedMetrics.totalClicks > 0 ? (aggregatedMetrics.totalSpend / aggregatedMetrics.totalClicks) : 0;
+    const cpa = aggregatedMetrics.totalConversions > 0 ? (aggregatedMetrics.totalSpend / aggregatedMetrics.totalConversions) : 0;
+    const roas = aggregatedMetrics.totalSpend > 0 ? (aggregatedMetrics.totalRevenue / aggregatedMetrics.totalSpend) : 0;
 
     res.json({
       success: true,
@@ -66,11 +66,11 @@ router.get('/dashboard', async (req: Request, res: Response, next: NextFunction)
           adsWithIssues: 0,
         },
         metrics: {
-          spend: Number(m.totalSpend || 0),
-          impressions: Number(m.totalImpressions || 0),
-          clicks: Number(m.totalClicks || 0),
-          conversions: Number(m.totalConversions || 0),
-          revenue: Number(m.totalRevenue || 0),
+          spend: Number(aggregatedMetrics.totalSpend || 0),
+          impressions: Number(aggregatedMetrics.totalImpressions || 0),
+          clicks: Number(aggregatedMetrics.totalClicks || 0),
+          conversions: Number(aggregatedMetrics.totalConversions || 0),
+          revenue: Number(aggregatedMetrics.totalRevenue || 0),
           ctr: Number(ctr.toFixed(2)),
           cpc: Number(cpc.toFixed(2)),
           cpa: Number(cpa.toFixed(2)),
