@@ -66,6 +66,16 @@ Access at `http://localhost:5173`.
 
 ---
 
+## 🧩 Local MCP Server (Development & CI)
+
+*   Purpose: provide a predictable, local model-like endpoint for integration tests and local feature development.
+*   Start locally: `npm run mcp:start` (use `npm run mcp:dev` for live reload during development).
+*   Main endpoints: `GET /health`, `POST /mcp/request`.
+
+See `lib/mcp/README.md` for details and examples.
+
+---
+
 ## 🧪 Testing
 
 *   **End-to-End**: `npm run test:e2e` (Simulates full user flow).
