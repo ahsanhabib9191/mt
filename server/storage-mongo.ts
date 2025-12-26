@@ -9,12 +9,12 @@ import { AdSetModel, IAdSet } from "../lib/db/models/ad-set";
 import { AdModel, IAd } from "../lib/db/models/ad";
 import { PerformanceSnapshotModel } from "../lib/db/models/performance-snapshot";
 import { OptimizationLogModel } from "../lib/db/models/optimization-log";
-import { MetaConnectionModel } from "../lib/db/models/MetaConnection";
+import { MetaConnectionModel, IMetaConnection } from "../lib/db/models/MetaConnection";
 import { v4 as uuidv4 } from "uuid";
 import mongoose from "mongoose";
 
 // Helper to convert Mongoose document to shared Schema interface
-function mapTenant(doc: any): Tenant {
+function mapTenant(doc: ITenant): Tenant {
     return {
         id: 0, // Placeholder, Mongo uses _id
         // @ts-ignore
@@ -26,7 +26,7 @@ function mapTenant(doc: any): Tenant {
     };
 }
 
-function mapCampaign(doc: any): Campaign {
+function mapCampaign(doc: ICampaign): Campaign {
     return {
         id: 0,
         campaignId: doc.campaignId,
@@ -50,7 +50,7 @@ function mapCampaign(doc: any): Campaign {
     };
 }
 
-function mapAdSet(doc: any): AdSet {
+function mapAdSet(doc: IAdSet): AdSet {
     return {
         id: 0,
         adSetId: doc.adSetId,
@@ -80,7 +80,7 @@ function mapAdSet(doc: any): AdSet {
     };
 }
 
-function mapAd(doc: any): Ad {
+function mapAd(doc: IAd): Ad {
     // Handle populated or raw references
     const campaignId = doc.campaignId?.campaignId || 'unknown';
     const adSetId = doc.adSetId?.adSetId || 'unknown';
@@ -108,7 +108,7 @@ function mapAd(doc: any): Ad {
     };
 }
 
-function mapMetaConnection(doc: any): MetaConnection {
+function mapMetaConnection(doc: IMetaConnection): MetaConnection {
     return {
         id: 0,
         // @ts-ignore
@@ -181,7 +181,7 @@ export class MongoStorage implements IStorage {
 
     async updateCampaign(campaignId: string, data: Partial<Campaign>): Promise<Campaign | undefined> {
         // Map partial Drizzle Campaign back to Mongoose update
-        const update: any = {};
+        const update: Partial<ICampaign> = {};
         if (data.name) update.name = data.name;
         if (data.status) update.status = data.status;
 
@@ -199,7 +199,7 @@ export class MongoStorage implements IStorage {
     }
 
     async getAdSets(filters: { campaignId?: string; accountId?: string; status?: string }, limit = 50, offset = 0): Promise<AdSet[]> {
-        const query: any = {};
+        const query: Partial<{ accountId: string; status: string; campaignId: mongoose.Types.ObjectId }> = {};
         if (filters.accountId) query.accountId = filters.accountId;
         if (filters.status) query.status = filters.status;
 
@@ -257,7 +257,7 @@ export class MongoStorage implements IStorage {
     }
 
     async updateAdSet(adSetId: string, data: Partial<AdSet>): Promise<AdSet | undefined> {
-        const update: any = {};
+        const update: Partial<IAdSet> = {};
         if (data.name) update.name = data.name;
         if (data.status) update.status = data.status;
         if (data.budget) update.budget = Number(data.budget);
@@ -272,7 +272,7 @@ export class MongoStorage implements IStorage {
     }
 
     async getAds(filters: { adSetId?: string; campaignId?: string; accountId?: string; status?: string }, limit = 50, offset = 0): Promise<Ad[]> {
-        const query: any = {};
+        const query: Partial<{ accountId: string; status: string; adSetId: mongoose.Types.ObjectId; campaignId: mongoose.Types.ObjectId }> = {};
         if (filters.accountId) query.accountId = filters.accountId;
         if (filters.status) query.status = filters.status;
 
@@ -337,7 +337,7 @@ export class MongoStorage implements IStorage {
     }
 
     async updateAd(adId: string, data: Partial<Ad>): Promise<Ad | undefined> {
-        const update: any = {};
+        const update: Partial<IAd> = {};
         if (data.name) update.name = data.name;
         if (data.status) update.status = data.status;
 
@@ -418,7 +418,7 @@ export class MongoStorage implements IStorage {
     }
 
     async getOptimizationLogs(filters: { entityType?: string; entityId?: string }, limit = 50): Promise<OptimizationLog[]> {
-        const query: any = {};
+        const query: Partial<{ entityType: string; entityId: string }> = {};
         if (filters.entityType) query.entityType = filters.entityType;
         if (filters.entityId) query.entityId = filters.entityId;
 

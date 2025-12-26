@@ -28,8 +28,8 @@ router.get('/recommendations', async (req: Request, res: Response, next: NextFun
   try {
     const { accountId } = req.query;
 
-    const query: any = { status: 'ACTIVE' };
-    if (accountId) query.accountId = accountId;
+    const query: { status: string; accountId?: string } = { status: 'ACTIVE' };
+    if (accountId) query.accountId = accountId as string;
 
     const activeAdSets = await AdSetModel.find(query);
     const recommendations: OptimizationRecommendation[] = [];
@@ -217,9 +217,9 @@ router.get('/logs', async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { entityType, entityId, limit = 50 } = req.query;
 
-    const query: any = {};
-    if (entityType) query.entityType = entityType;
-    if (entityId) query.entityId = entityId;
+    const query: { entityType?: string; entityId?: string } = {};
+    if (entityType) query.entityType = entityType as string;
+    if (entityId) query.entityId = entityId as string;
 
     const logs = await OptimizationLogModel.find(query)
       .sort({ executedAt: -1 })
@@ -243,7 +243,7 @@ router.get('/learning-phase', async (req: Request, res: Response, next: NextFunc
   try {
     const { accountId } = req.query;
 
-    const query: any = {
+    const query: { status: string; learningPhaseStatus: { $in: string[] }; accountId?: string } = {
       status: 'ACTIVE',
       learningPhaseStatus: { $in: ['LEARNING', 'LEARNING_LIMITED'] }
     };

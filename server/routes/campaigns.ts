@@ -51,7 +51,7 @@ router.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
 router.get('/:id/ad-sets', async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { status } = req.query;
-    const query: any = { campaignId: req.params.id };
+    const query: { campaignId: string; status?: string } = { campaignId: req.params.id };
     if (status) {
       query.status = status;
     }
@@ -67,7 +67,7 @@ router.get('/:id/ad-sets', async (req: Request, res: Response, next: NextFunctio
 router.get('/:id/ads', async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { status } = req.query;
-    const query: any = { campaignId: req.params.id };
+    const query: { campaignId: string; status?: string } = { campaignId: req.params.id };
     if (status) {
       query.status = status;
     }

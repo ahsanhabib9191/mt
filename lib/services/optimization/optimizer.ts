@@ -27,8 +27,8 @@ export interface OptimizationResult {
     entityId: string;
     entityType: 'CAMPAIGN' | 'AD_SET' | 'AD';
     actionTaken: string;
-    oldValue: any;
-    newValue: any;
+    oldValue: string | number | boolean;
+    newValue: string | number | boolean;
     metricValue: number;
     timestamp: Date;
 }

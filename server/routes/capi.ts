@@ -8,17 +8,62 @@ const router = Router();
 const META_API_VERSION = process.env.META_API_VERSION || 'v21.0';
 const META_API_BASE = `https://graph.facebook.com/${META_API_VERSION}`;
 
+interface UserData {
+  email?: string;
+  phone?: string;
+  firstName?: string;
+  lastName?: string;
+  city?: string;
+  state?: string;
+  zipCode?: string;
+  country?: string;
+  externalId?: string;
+  gender?: string;
+  dateOfBirth?: string;
+  clientIpAddress?: string;
+  clientUserAgent?: string;
+  fbc?: string;
+  fbp?: string;
+}
+
+interface IncomingEvent {
+  eventName?: string;
+  event_name?: string;
+  eventTime?: number;
+  event_time?: number;
+  actionSource?: string;
+  action_source?: string;
+  eventSourceUrl?: string;
+  event_source_url?: string;
+  eventId?: string;
+  event_id?: string;
+  userData?: UserData;
+  user_data?: UserData;
+  customData?: Record<string, unknown>;
+  custom_data?: Record<string, unknown>;
+}
+
+interface FormattedEvent {
+  event_name: string;
+  event_time: number;
+  action_source: string;
+  event_source_url?: string;
+  event_id?: string;
+  user_data: Record<string, unknown>;
+  custom_data?: Record<string, unknown>;
+}
+
 interface MetaApiResponse {
-  data?: any[];
+  data?: unknown[];
   error?: { message: string; code?: number };
   events_received?: number;
   messages?: string[];
   fbtrace_id?: string;
   event_match_quality?: number;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
-async function metaApiRequest(endpoint: string, accessToken: string, method: string = 'GET', body?: any): Promise<MetaApiResponse> {
+async function metaApiRequest(endpoint: string, accessToken: string, method: string = 'GET', body?: unknown): Promise<MetaApiResponse> {
   const url = `${META_API_BASE}${endpoint}`;
   const options: RequestInit = {
     method,
@@ -146,9 +191,9 @@ router.post('/events', async (req: Request, res: Response, next: NextFunction) =
       return res.status(404).json({ error: 'No active Meta connection found for this account' });
     }
 
-    const formattedEvents = events.map((event: any) => {
-      const formattedEvent: any = {
-        event_name: event.eventName || event.event_name,
+    const formattedEvents = (events as IncomingEvent[]).map((event) => {
+      const formattedEvent: FormattedEvent = {
+        event_name: event.eventName || event.event_name || 'Unknown',
         event_time: event.eventTime || event.event_time || Math.floor(Date.now() / 1000),
         action_source: event.actionSource || event.action_source || 'website',
         event_source_url: event.eventSourceUrl || event.event_source_url,
@@ -215,7 +260,7 @@ router.post('/events', async (req: Request, res: Response, next: NextFunction) =
       return formattedEvent;
     });
 
-    const payload: any = {
+    const payload: { data: FormattedEvent[]; test_event_code?: string } = {
       data: formattedEvents,
       partner_agent: 'shothik-capi-1.0'
     };
@@ -340,7 +385,7 @@ router.post('/test-event', async (req: Request, res: Response, next: NextFunctio
       return res.status(404).json({ error: 'No active Meta connection found for this account' });
     }
 
-    const testEvent: any = {
+    const testEvent: FormattedEvent = {
       event_name: eventName || 'TestEvent',
       event_time: Math.floor(Date.now() / 1000),
       action_source: 'website',
