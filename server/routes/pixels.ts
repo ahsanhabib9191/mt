@@ -8,12 +8,12 @@ const META_API_VERSION = process.env.META_API_VERSION || 'v21.0';
 const META_API_BASE = `https://graph.facebook.com/${META_API_VERSION}`;
 
 interface MetaApiResponse {
-  data?: any[];
+  data?: unknown[];
   error?: { message: string; code?: number };
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
-async function metaApiRequest(endpoint: string, accessToken: string, method: string = 'GET', body?: any): Promise<MetaApiResponse> {
+async function metaApiRequest(endpoint: string, accessToken: string, method: string = 'GET', body?: unknown): Promise<MetaApiResponse> {
   const url = `${META_API_BASE}${endpoint}`;
   const options: RequestInit = {
     method,

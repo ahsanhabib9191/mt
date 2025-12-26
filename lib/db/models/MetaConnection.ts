@@ -47,15 +47,14 @@ const MetaConnectionSchema = new Schema<IMetaConnection>({
 
 // Encrypt tokens before save
 MetaConnectionSchema.pre('save', function (next) {
-  const doc = this as any;
-  if (doc.isModified('accessToken')) {
-    doc.accessToken = encrypt(doc.accessToken);
+  if (this.isModified('accessToken')) {
+    this.accessToken = encrypt(this.accessToken);
   }
-  if (doc.isModified('refreshToken') && doc.refreshToken) {
-    doc.refreshToken = encrypt(doc.refreshToken);
+  if (this.isModified('refreshToken') && this.refreshToken) {
+    this.refreshToken = encrypt(this.refreshToken);
   }
-  if (doc.pages && doc.pages.length > 0) {
-    // Potentially encrypt page tokens too if sensitive, 
+  if (this.pages && this.pages.length > 0) {
+    // Potentially encrypt page tokens too if sensitive,
     // but for MVP just keeping them plain or assuming they are short lived or same as user token (usually distinct)
     // If we wanted to be strict, we'd encrypt pages[i].access_token too.
   }
@@ -87,7 +86,7 @@ export class MetaConnection {
     return MetaConnectionModel.findOne({ tenantId, adAccountId }).exec();
   }
   static async updateTokens(tenantId: string, adAccountId: string, update: Partial<IMetaConnection>): Promise<IMetaConnection | null> {
-    const toUpdate: any = { ...update };
+    const toUpdate: Partial<IMetaConnection> = { ...update };
     if (toUpdate.accessToken) toUpdate.accessToken = encrypt(toUpdate.accessToken);
     if (toUpdate.refreshToken) toUpdate.refreshToken = encrypt(toUpdate.refreshToken);
     return MetaConnectionModel.findOneAndUpdate({ tenantId, adAccountId }, toUpdate, { new: true }).exec();

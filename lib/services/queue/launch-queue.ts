@@ -24,7 +24,14 @@ export interface LaunchJobData {
     // Targeting & Budget
     dailyBudget: number;
     duration: number;
-    targeting: any;
+    targeting: {
+        geoLocations?: { countries?: string[] };
+        ageMin?: number;
+        ageMax?: number;
+        genders?: number[];
+        interests?: string[];
+        [key: string]: unknown;
+    };
 
     // Creative Data
     videoUrl?: string; // If video ad
@@ -33,11 +40,19 @@ export interface LaunchJobData {
 
 export type JobStatus = 'pending' | 'processing' | 'completed' | 'failed';
 
+export interface LaunchJobResult {
+    campaignId?: string;
+    adSetId?: string;
+    adId?: string;
+    success: boolean;
+    message?: string;
+}
+
 export interface LaunchJob {
     id: string;
     data: LaunchJobData;
     status: JobStatus;
-    result?: any;
+    result?: LaunchJobResult;
     error?: string;
     createdAt: number;
     updatedAt: number;

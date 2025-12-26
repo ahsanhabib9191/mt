@@ -992,8 +992,8 @@ router.post('/launch', async (req: Request, res: Response, next: NextFunction) =
 
     // 3. Poll for result (Shim for synchronous Frontend)
     // Wait up to 30 seconds for the worker to finish
-    let result: any = null;
-    let error: any = null;
+    let result: { campaignId?: string; adSetId?: string; adId?: string; success: boolean; message?: string } | null = null;
+    let error: string | null = null;
     let isTimeout = false;
 
     const startTime = Date.now();
@@ -1083,9 +1083,9 @@ router.get('/drafts', async (req: Request, res: Response, next: NextFunction) =>
   try {
     const { tenantId } = req.query;
 
-    const query: any = { status: 'draft' };
+    const query: { status: string; tenantId?: string } = { status: 'draft' };
     if (tenantId) {
-      query.tenantId = tenantId;
+      query.tenantId = tenantId as string;
     }
 
     const drafts = await BoostDraftModel.find(query)
@@ -1212,8 +1212,8 @@ router.post('/pixel-analysis', async (req: Request, res: Response, next: NextFun
         ...analysis,
         smartDefaults: getSmartDefaults(analysis.userLevel, analysis.eventCounts)
       });
-    } catch (apiError: any) {
-      logger.warn('Pixel analysis API failed', { pixelId, error: apiError?.message });
+    } catch (apiError: unknown) {
+      logger.warn('Pixel analysis API failed', { pixelId, error: apiError instanceof Error ? apiError.message : 'Unknown error' });
       res.json({
         pixelId,
         userLevel: 'newbie',

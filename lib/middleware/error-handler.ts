@@ -4,27 +4,27 @@ import { logger } from '../utils/logger';
 export class AppError extends Error {
   statusCode: number;
   code: string;
-  details?: any;
+  details?: unknown;
   isOperational: boolean;
-  constructor(message: string, statusCode = 500, code = 'INTERNAL', details?: any, isOperational = true) {
+  constructor(message: string, statusCode = 500, code = 'INTERNAL', details?: unknown, isOperational = true) {
     super(message);
     this.statusCode = statusCode;
     this.code = code;
     this.details = details;
     this.isOperational = isOperational;
   }
-  static badRequest(message = 'Bad Request', details?: any) { return new AppError(message, 400, 'BAD_REQUEST', details); }
-  static unauthorized(message = 'Unauthorized', details?: any) { return new AppError(message, 401, 'UNAUTHORIZED', details); }
-  static forbidden(message = 'Forbidden', details?: any) { return new AppError(message, 403, 'FORBIDDEN', details); }
-  static notFound(message = 'Not Found', details?: any) { return new AppError(message, 404, 'NOT_FOUND', details); }
-  static internal(message = 'Internal Server Error', details?: any) { return new AppError(message, 500, 'INTERNAL', details); }
+  static badRequest(message = 'Bad Request', details?: unknown) { return new AppError(message, 400, 'BAD_REQUEST', details); }
+  static unauthorized(message = 'Unauthorized', details?: unknown) { return new AppError(message, 401, 'UNAUTHORIZED', details); }
+  static forbidden(message = 'Forbidden', details?: unknown) { return new AppError(message, 403, 'FORBIDDEN', details); }
+  static notFound(message = 'Not Found', details?: unknown) { return new AppError(message, 404, 'NOT_FOUND', details); }
+  static internal(message = 'Internal Server Error', details?: unknown) { return new AppError(message, 500, 'INTERNAL', details); }
 }
 
 export interface ErrorResponse {
   status: 'error';
   code: string;
   message: string;
-  details?: any;
+  details?: unknown;
   requestId: string;
   timestamp: string;
 }

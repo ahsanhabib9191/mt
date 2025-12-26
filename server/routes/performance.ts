@@ -26,7 +26,7 @@ router.get('/dashboard', async (req: Request, res: Response, next: NextFunction)
 
     // Performance Metrics Aggregation
     // We sum 'CAMPAIGN' level snapshots to avoid double counting (AdSets, Ads)
-    const matchStage: any = {
+    const matchStage: { date: { $gte: Date; $lte: Date }; entityType: string; accountId?: string } = {
       date: { $gte: startDate, $lte: endDate },
       entityType: 'CAMPAIGN'
     };
@@ -90,7 +90,7 @@ router.get('/trends', async (req: Request, res: Response, next: NextFunction) =>
     const startDate = new Date();
     startDate.setDate(startDate.getDate() - Number(days));
 
-    const matchStage: any = {
+    const matchStage: { date: { $gte: Date }; entityType: string; accountId?: string } = {
       date: { $gte: startDate },
       entityType: 'CAMPAIGN'
     };
