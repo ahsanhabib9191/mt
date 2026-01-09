@@ -191,7 +191,7 @@ function isAllowedUrl(urlString: string): boolean {
   }
 }
 
-function extractColors(html: string): string[] {
+function extractBrandColors(html: string): string[] {
   const colors: string[] = [];
 
   const hexMatches = html.matchAll(/#([0-9A-Fa-f]{6}|[0-9A-Fa-f]{3})(?![0-9A-Fa-f])/g);
@@ -206,10 +206,10 @@ function extractColors(html: string): string[] {
 
   const rgbMatches = html.matchAll(/rgb\s*\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)/gi);
   for (const match of rgbMatches) {
-    const r = parseInt(match[1]).toString(16).padStart(2, '0');
-    const g = parseInt(match[2]).toString(16).padStart(2, '0');
-    const b = parseInt(match[3]).toString(16).padStart(2, '0');
-    const color = `#${r}${g}${b}`.toUpperCase();
+    const redHex = parseInt(match[1]).toString(16).padStart(2, '0');
+    const greenHex = parseInt(match[2]).toString(16).padStart(2, '0');
+    const blueHex = parseInt(match[3]).toString(16).padStart(2, '0');
+    const color = `#${redHex}${greenHex}${blueHex}`.toUpperCase();
     if (!colors.includes(color) && colors.length < 5) {
       if (!['#FFFFFF', '#000000'].includes(color)) {
         colors.push(color);
@@ -409,7 +409,7 @@ async function scrapeUrl(url: string): Promise<ScrapedData> {
       .trim()
       .slice(0, 5000); // Increased text limit for better context
 
-    const brandColors = extractColors(html);
+    const brandColors = extractBrandColors(html);
     const pixel = detectPixel(html);
     const usp = extractUSP(html, title, description);
 
